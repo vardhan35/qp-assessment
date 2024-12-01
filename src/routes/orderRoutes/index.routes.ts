@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { getAllOrders } from "../../services/orders";
+import { getAllOrders } from "../../services/orders/orders.service";
 const router = express.Router();
 
 let orders: { id: number; item: string; quantity: number; price: number }[] =
