@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import helmet from "helmet";
 import cors from "cors";
 import connectDB from "./db/connection";
-import groceryRoutes from "./routes/groceryRoutes/index.routes";
+import groceryRoutes from "./routes/groceryRoutes/groceries.routes";
 import authRoutes from "./routes/authRoutes/auth.routes";
 import orderRoutes from "./routes/orderRoutes/index.routes";
 
