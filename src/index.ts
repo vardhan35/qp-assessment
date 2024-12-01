@@ -4,7 +4,7 @@ import helmet from "helmet";
 import cors from "cors";
 import connectDB from "./db/connection";
 import groceryRoutes from "./routes/groceryRoutes/index.routes";
-import authRoutes from "./routes/authRoutes/index.routes";
+import authRoutes from "./routes/authRoutes/auth.routes";
 import orderRoutes from "./routes/orderRoutes/index.routes";
 
 const PORT = 5555;
