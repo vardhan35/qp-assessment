@@ -1,12 +1,36 @@
 import express, { Request, Response } from "express";
-import { getAllOrders } from "../../services/orders/orders.service";
+import {
+  createOrders,
+  getAllOrders,
+} from "../../services/orders/orders.service";
 const router = express.Router();
 
 let orders: { id: number; item: string; quantity: number; price: number }[] =
   [];
 
-router.get("/orders", (req: Request, res: Response) => {
-  res.json({ orders });
+// create order
+router.post("/", async (req: Request, res: Response) => {
+  try {
+    const response = await createOrders(req, res);
+    res.status(200).json({ data: response });
+  } catch (error: any) {
+    res.status(400).json({
+      ok: false,
+      message: error.message,
+    });
+  }
+});
+
+router.get("/all", async (req: Request, res: Response) => {
+  try {
+    const response = await getAllOrders(req, res);
+    res.status(200).json({ data: response });
+  } catch (error: any) {
+    res.status(400).json({
+      ok: false,
+      message: error.message,
+    });
+  }
 });
 
 router.get("/orders/:id", (req: Request, res: Response) => {
@@ -17,12 +41,6 @@ router.get("/orders/:id", (req: Request, res: Response) => {
   } else {
     res.status(404).json({ message: `Order with ID ${id} not found` });
   }
-});
-
-router.post("/orders", (req: Request, res: Response) => {
-  const { item, quantity, price } = req.body;
-
-  res.status(201).json({ message: "Order created successfully" });
 });
 
 router.put("/orders/:id", (req: Request, res: Response) => {

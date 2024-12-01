@@ -5,7 +5,7 @@ import cors from "cors";
 import connectDB from "./db/connection";
 import groceryRoutes from "./routes/groceryRoutes/groceries.routes";
 import authRoutes from "./routes/authRoutes/auth.routes";
-import orderRoutes from "./routes/orderRoutes/index.routes";
+import orderRoutes from "./routes/orderRoutes/orders.routes";
 
 const PORT = 5555;
 const app = express();
@@ -17,9 +17,9 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/grocery", groceryRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/order", orderRoutes);
+app.use("/api/v1/grocery", groceryRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/orders", orderRoutes);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
