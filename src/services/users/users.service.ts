@@ -1,6 +1,7 @@
 import { User } from "../../db/models/user.schema";
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
+import { generateToken } from "../../utils/jwt/generateToken";
 
 export async function createUser(req: Request, res: Response) {
   const { username, password, role } = req.body;
@@ -22,7 +23,11 @@ export async function login(req: Request, res: Response) {
   if (user.length) {
     const isMatch = await bcrypt.compare(password, user[0].password);
     if (isMatch) {
-      return user[0];
+      const token = generateToken({
+        id: user[0]._id,
+        username: username,
+      });
+      return { login: true, token };
     } else {
       throw new Error("Password Does Not Match");
     }
