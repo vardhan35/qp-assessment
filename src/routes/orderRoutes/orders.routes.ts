@@ -1,7 +1,9 @@
 import express, { Request, Response } from "express";
 import {
   createOrders,
+  deleteOrder,
   getAllOrders,
+  getAllOrdersByUser,
 } from "../../services/orders/orders.service";
 const router = express.Router();
 
@@ -21,6 +23,7 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
+// Get all orders
 router.get("/all", async (req: Request, res: Response) => {
   try {
     const response = await getAllOrders(req, res);
@@ -33,27 +36,29 @@ router.get("/all", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/orders/:id", (req: Request, res: Response) => {
-  const { id } = req.params;
-  const order = orders.find((order) => order.id === parseInt(id));
-  if (order) {
-    res.json({ order });
-  } else {
-    res.status(404).json({ message: `Order with ID ${id} not found` });
+// Get orders by userid
+router.get("/user/:id", async (req: Request, res: Response) => {
+  try {
+    const response = await getAllOrdersByUser(req, res);
+    res.status(200).json({ data: response });
+  } catch (error: any) {
+    res.status(400).json({
+      ok: false,
+      message: error.message,
+    });
   }
 });
 
-router.put("/orders/:id", (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { item, quantity, price } = req.body;
-
-  res.json({ message: `Order with ID ${id} updated successfully` });
-});
-
-router.delete("/orders/:id", (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  res.json({ message: `Order with ID ${id} deleted successfully` });
+router.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    const response = await deleteOrder(req, res);
+    res.status(200).json({ data: response });
+  } catch (error: any) {
+    res.status(400).json({
+      ok: false,
+      message: error.message,
+    });
+  }
 });
 
 export default router;
