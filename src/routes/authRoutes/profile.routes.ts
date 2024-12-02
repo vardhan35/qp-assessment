@@ -6,7 +6,10 @@ import {
 } from "../../services/users/users.service";
 const router = express.Router();
 
-// to get all users with role of user
+/**
+ * @route GET /users/get-by-role/:role
+ * @desc Get all the users according to a specific role
+ */
 router.get("/users/get-by-role/:role", async (req: Request, res: Response) => {
   try {
     const users = await getUsersByRole(req, res);
@@ -18,7 +21,11 @@ router.get("/users/get-by-role/:role", async (req: Request, res: Response) => {
     });
   }
 });
-// get all users
+
+/**
+ * @route GET /users/get-all
+ * @desc Get all users
+ */
 router.get("/users/get-all", async (req: Request, res: Response) => {
   try {
     const users = await getAllUsers(req, res);
@@ -30,7 +37,11 @@ router.get("/users/get-all", async (req: Request, res: Response) => {
     });
   }
 });
-// delete user
+
+/**
+ * @route DELETE /users/:username
+ * @desc Delete a users by username
+ */
 router.delete("/users/:username", async (req: Request, res: Response) => {
   try {
     const resb = await deleteUserByUserId(req, res);

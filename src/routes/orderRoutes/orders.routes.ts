@@ -7,10 +7,10 @@ import {
 } from "../../services/orders/orders.service";
 const router = express.Router();
 
-let orders: { id: number; item: string; quantity: number; price: number }[] =
-  [];
-
-// create order
+/**
+ * @route POST /user
+ * @desc Create account or User
+ */
 router.post("/", async (req: Request, res: Response) => {
   try {
     const response = await createOrders(req, res);
@@ -23,7 +23,10 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
-// Get all orders
+/**
+ * @route GET /all
+ * @desc Get all groceries
+ */
 router.get("/all", async (req: Request, res: Response) => {
   try {
     const response = await getAllOrders(req, res);
@@ -36,7 +39,10 @@ router.get("/all", async (req: Request, res: Response) => {
   }
 });
 
-// Get orders by userid
+/**
+ * @route GET /all
+ * @desc Get all groceries
+ */
 router.get("/user/:id", async (req: Request, res: Response) => {
   try {
     const response = await getAllOrdersByUser(req, res);
@@ -49,6 +55,10 @@ router.get("/user/:id", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @route DELETE /:id
+ * @desc Delete Grocery By Id
+ */
 router.delete("/:id", async (req: Request, res: Response) => {
   try {
     const response = await deleteOrder(req, res);

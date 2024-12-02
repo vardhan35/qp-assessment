@@ -3,7 +3,10 @@ import { createUser, login } from "../../services/users/users.service";
 
 const router = express.Router();
 
-// Create User or SignUp
+/**
+ * @route POST /user
+ * @desc Create account or User
+ */
 router.post("/users", async (req: Request, res: Response) => {
   try {
     const response = await createUser(req, res);
@@ -16,7 +19,10 @@ router.post("/users", async (req: Request, res: Response) => {
   }
 });
 
-// User Login
+/**
+ * @route POST /user/login
+ * @desc User Login
+ */
 router.post("/users/login", async (req: Request, res: Response) => {
   try {
     const response = await login(req, res);

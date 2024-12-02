@@ -9,6 +9,10 @@ import {
 
 const router = express.Router();
 
+/**
+ * @route GET /groceries
+ * @desc Get All Groceries
+ */
 router.get("/groceries", async (req: Request, res: Response) => {
   try {
     const groceries = await getAllgroceries(req, res);
@@ -21,6 +25,10 @@ router.get("/groceries", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @route GET /groceries/:id
+ * @desc Get Grocery By id
+ */
 router.get("/groceries/:id", async (req: Request, res: Response) => {
   try {
     const groceries = await getGroceriesByID(req, res);
@@ -33,6 +41,10 @@ router.get("/groceries/:id", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @route POST /groceries/:id
+ * @desc Create a grocery
+ */
 router.post("/groceries", async (req: Request, res: Response) => {
   try {
     const groceries = await postGroceries(req, res);
@@ -45,7 +57,10 @@ router.post("/groceries", async (req: Request, res: Response) => {
   }
 });
 
-// Update API Not working
+/**
+ * @route PUT /groceries/:id
+ * @desc Update User Id
+ */
 router.put("/groceries/:id", async (req: Request, res: Response) => {
   try {
     const groceries = await updateGroceriesByID(req, res);
@@ -58,6 +73,10 @@ router.put("/groceries/:id", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @route DELETE /groceries/:id
+ * @desc Delete Grocery By Id
+ */
 router.delete("/groceries/:id", async (req: Request, res: Response) => {
   try {
     const groceries = await deleteGroceriesByID(req, res);
